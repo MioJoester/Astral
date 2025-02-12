@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Astral AI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astral</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="https://i1.sndcdn.com/avatars-VU6f5Zqi1uAISl6b-LEQ5fQ-t200x200.jpg">
+    
+
+   <!-- Prism.js CSS (GitHub Dark Theme) -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism-themes/themes/prism-ghcolors.min.css">
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+   <!-- Language Support (Add more if needed) -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+
+
+
+<!-- ✅ Initialize Highlight.js -->
+
+
+<style>
+
+
+
+
+
+.mainframe {
+    display: flex;
+    flex-direction: row;
+    height: 620px;
+    width: 100%;
+    background-color: transparent;
+}
+
+body {
+    background-color: #000;
+}
+
+
+.diver {
+    width: 10px;
+}
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    height: 100%;
+    width: 19%;
+    background-color: #171717;
+}
+
+.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    height: 620px;
+    background-color: #212121;
+    border-radius: 12px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    height: 40px;
+    width: 100%;
+    background-color: transparent;
+    padding-left: 10px;
+    color: #fff;
+    font-size: large;
+    user-select: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+#search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 160px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: large;
+  
+
+}
+
+.coder-space {
+    width: 30px;
+}
+
+#new-chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+   
+    border-radius: 12px;
+    color: #fff;
+    font-size: large;
+}
+
+#sidebar-button {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    border-radius: 12px;
+    color: #fff;
+    font-size: large;
+
+}
+
+.active-nav {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    font-size: large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.model-switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    height: 30px;
+    width: 100px;
+    margin-left: 50px;
+    margin-top: 5px;
+    color: #fff;
+    font-size: large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: transparent;
+    border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
+
+}
+
+.chat-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 12px;
+    color: #fff;
+    font-size: x-large;
+
+
+}
+
+.user-acc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    background-image: url(https://i1.sndcdn.com/avatars-bpcAURzpiCB05Ogs-oihfPA-t200x200.jpg);
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: large;
+}
+
+.fixing-space {
+    width: 20px;
+}
+
+.opp-cons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+   padding-left: 10px;
+    border-radius: 10px;
+    background-color:transparent;
+    height: 45px;
+    width: 90%;
+    color: #fff;
+    font-size: medium;
+    user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.options:hover {
+    background-color: #2f2f2f;
+}
+
+.opp-space {
+    height: 8px;
+}
+
+#user-input {
+    height: 100px;
+    padding-left: 20px;
+    width: 600px;
+    border-radius: 21px;
+    background-color: #121212;
+    resize: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #fff;
+    border: 2px solid #fff;
+    font-size: medium;
+
+}
+
+.user-input-con {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 10px;
+    justify-content: center;
+    height: 100px;
+    width: 100%;
+    background-color: transparent;
+}
+
+.input-content-alignment {
+    width: 20px;
+}
+
+#upload-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    background-color: #121212;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: medium;
+}
+
+
+#send-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 30px;
+    background-color: #121212;
+    border: none;
+    cursor: pointer;
+    margin-top: 5px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: medium;
+
+}
+.button-cons {
+    display: flex;
+    flex-direction: row;
+    height: 90px;
+    width: 100px;
+}
+
+#chatter-place {
+    display: flex;
+    flex-direction: column;
+    height: 460px;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 750px;
+    background-color: transparent;
+    
+}
+
+.user-message {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100px;
+    border-radius: 30px;
+    background-color: #303030;
+    color: #fff;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+
+.chat-definer {
+    height: 10px;
+}
+
+.ai-message {
+
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    height: 85px;
+    width: 600px;
+    border-radius: 30px;
+    background-color: #121212;
+    color: #fff;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+
+}
+
+.message-bubble {
+    max-width: 60%;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+    .user {
+        display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: auto;
+ 
+    
+    max-width: 60%;
+    background-color: #303030;
+    color: white;
+    
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 12px;
+    
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+
+    /* Fix alignment */
+    margin-left: auto; /* Pushes it to the right */
+    word-wrap: break-word; /* Ensure long words don't overflow */
+    }
+
+.bot {
+    background-color: transparent;
+    color: white;
+    align-self: flex-start;
+    max-width: 90%;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+
+}
+
+
+#chatter-place {
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+}
+
+#chatter-place::-webkit-scrollbar {
+    width: none; /* Chrome, Safari, Edge */
+}
+
+
+.des-heading{
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+    color: #fff;
+    font-size: medium;
+    user-select: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.Astral-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: transparent;
+    background-image: url(https://i1.sndcdn.com/avatars-VU6f5Zqi1uAISl6b-LEQ5fQ-t200x200.jpg);
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    color: #fff;
+    font-size: large;
+}
+
+.lolopager {
+    width: 10px;
+}
+
+pre {
+    background-color: #fff !important;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+code {
+    font-family: 'Fira Code', monospace;
+}
+
+.des-upcoming {
+    margin-top: 50px;
+    margin-left: 14px;
+    margin-right: 14px;
+    text-align: center;
+    height: 150px;
+    width: 90%;
+    background-color: #121212;
+    border-radius: 5px;
+}
+
+.upcoming-header {
+    padding-top: 5px;
+    color: #fff;
+    font-size: medium;
+    user-select: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.upcoming-content {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-align: left;
+    color: #fff;
+    font-size: medium;
+    user-select: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+
+}
+
+
+.inver-link-spacing {
+    width: 800px;
+    text-decoration: none;
+    color: transparent;
+}
+
+a {
+    text-decoration: none;
+}
+
+.make-it-better {
+    display: flex;
+    height:200px;
+    width: 100%;
+    background-color: transparent;
+    align-items: center;
+    justify-content: center;
+}
+
+#take_idk {
+    height: 40px;
+    width:200px;
+    background-color: transparent;
+    border: none;
+    border-radius: 21px;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: large;
+    transition: all 0.3s ease-in-out;
+    text-decoration: underline;
+}
+
+
+
+</style>
+
+
+    
+
+    
+
+
+
+
+</head>
+<body>
+    <div class="mainframe">
+        <div id="sidebar">
+            <div class="nav"> <div class="Astral-logo"></div>  <div class="lolopager"></div> Astral-AI  </div>
+
+
+            <div class="des-heading"> <p>Astral-AI is a fast, accurate, and developer-friendly chatbot that provides real-time responses, including syntax-highlighted code, quick explanations, and AI-powered insights.</p></div>
+
+            <div class="des-upcoming">
+                <div class="upcoming-header">Upcoming feuture</div>
+                <div class="upcoming-content"><p>Image analysis, Image generation, AI voice interaction.</p></div>
+            </div>
+
+            <div class="make-it-better">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdPlGEEDhVLsIh7JE3OSvRa11cbfkzxchoia8_QbTfkC3YeJw/viewform?usp=header" target="_blank"><button id="take_idk">Make Astral better</button></a>
+            </div>
+
+
+        </div>
+
+
+
+
+
+<div class="diver"></div>
+
+
+        <div class="active">
+            <div class="active-nav">
+                 <button id="sidebar-button" onclick="collapse()"><i class="fas fa-bars"></i></button>
+                <div class="model-switch">Astral V1</div>
+
+                    <div class="inver-link-spacing"></div>
+               <a href="https://github.com/MioJoester" target="_blank"><div class="chat-link"><i class="fab fa-github"></i></div></a>
+                    <div class="fixing-space"></div>
+                    <a href="https://discord.com/users/1274662028820217911" target="_blank"><div class="chat-link"><i class="fab fa-discord"></i></div></a>
+                
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div id="chatter-place"></div>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="user-input-con">
+
+               
+
+                <textarea id="user-input" placeholder="Message Astral" maxlength="600"></textarea>
+
+                <div class="input-content-alignment"></div>
+
+                <div class="button-cons">
+                <button id="send-input"><i class="fas fa-arrow-up"></i></button>
+                <div class="input-content-alignment"></div>
+                <!-- <button id="upload-input"><i class="fas fa-plus"></i></button> -->
+                </div>
+
+
+
+             </div>
+
+             
+             
+         </div>
+
+        
+
+
+    </div>
+</body>
+
+<script>
+
+const workerURL = "https://shiny-sea-4cab.mthaker630.workers.dev/"; 
+
+let chatHistory = []; 
+
+async function sendMessage() {
+    const userInputElement = document.getElementById("user-input");
+    const userInput = userInputElement.value.trim();
+    
+    if (!userInput) return;
+
+    displayMessage(userInput, "user");
+
+    
+    chatHistory.push({ role: "user", content: userInput });
+
+    try {
+        const response = await fetch(workerURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages: chatHistory }) 
+        });
+
+        if (!response.ok) throw new Error("Failed to fetch");
+
+        const data = await response.json();
+        const aiResponse = data.choices[0].message.content;
+
+        displayMessage(aiResponse, "bot");
+
+        // ✅ Add AI response to chat history
+        chatHistory.push({ role: "assistant", content: aiResponse });
+
+    } catch (error) {
+        displayMessage("An error occurred while fetching the response.", "bot");
+        console.error("Fetch Error:", error);
+    }
+
+    
+    userInputElement.value = "";
+}
+
+
+function displayMessage(text, sender) {
+    const chatContainer = document.getElementById("chatter-place");
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("message", sender);
+    chatContainer.appendChild(messageDiv);
+
+    const parts = text.split(/(```\w*\n[\s\S]+?```)/g);
+    let index = 0;
+
+    function typeEffect() {
+        if (index < parts.length) {
+            let part = parts[index];
+
+            if (part.startsWith("```")) {
+                // ✅ Extract language & code content
+                const match = part.match(/```(\w*)\n([\s\S]+?)```/);
+                if (match) {
+                    const lang = match[1] || "plaintext"; 
+                    const codeContent = match[2];
+
+                    const pre = document.createElement("pre");
+                    const code = document.createElement("code");
+                    code.classList.add(`language-${lang}`);
+                    code.textContent = codeContent; // Set raw text content
+
+                    pre.appendChild(code);
+                    messageDiv.appendChild(pre);
+
+                    // ✅ Ensure Prism.js applies properly
+                    setTimeout(() => Prism.highlightElement(code), 50);
+                }
+            } else {
+                // ✅ Handle Normal Text with Paragraphs
+                const paragraphs = part.split(/\n\s*\n/);
+                let paraIndex = 0;
+
+                function typeParagraph() {
+                    if (paraIndex < paragraphs.length) {
+                        const para = document.createElement("p");
+                        messageDiv.appendChild(para);
+
+                        let charIndex = 0;
+                        function typeText() {
+                            if (charIndex < paragraphs[paraIndex].length) {
+                                para.innerHTML += paragraphs[paraIndex][charIndex];
+                                charIndex++;
+                                setTimeout(typeText, 5);
+                            } else {
+                                paraIndex++;
+                                setTimeout(typeParagraph, 200); // Delay between paragraphs
+                            }
+                        }
+                        typeText();
+                    } else {
+                        index++;
+                        typeEffect();
+                    }
+                }
+                typeParagraph();
+                return;
+            }
+
+            index++;
+            typeEffect();
+        }
+
+        // ✅ Ensure the chat scrolls to the latest message
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    if (sender === "bot") {
+        setTimeout(typeEffect, 100); // Delay to prevent DOM issues
+    } else {
+        const textPara = document.createElement("p");
+        textPara.innerHTML = text.replace(/\n/g, "<br>");
+        messageDiv.appendChild(textPara);
+    }
+
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById("send-input").addEventListener("click", sendMessage);
+
+function collapse() {
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar) {
+        sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+    }
+}
+    </script>
+</html>
