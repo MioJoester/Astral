@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" href="https://i1.sndcdn.com/avatars-VU6f5Zqi1uAISl6b-LEQ5fQ-t200x200.jpg">
     
-
    <!-- Prism.js CSS (GitHub Dark Theme) -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/PrismJS/prism-themes/themes/prism-ghcolors.min.css">
 
@@ -757,10 +756,10 @@ function displayMessage(text, sender) {
                     code.textContent = codeContent; // Set raw text content
 
                     // ✅ Add Copy Button
-                    const copyBtn = document.createElement("button");
-                    copyBtn.classList.add("copy-btn");
-                    copyBtn.textContent = "Copy";
-                    copyBtn.onclick = () => copyToClipboard(code, copyBtn);
+                  const copyBtn = document.createElement("button");
+                copyBtn.classList.add("copy-btn");
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i>'; // Use innerHTML instead of textContent
+                copyBtn.onclick = () => copyToClipboard(code, copyBtn);
 
                     const codeWrapper = document.createElement("div");
                     codeWrapper.style.position = "relative";
