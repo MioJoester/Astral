@@ -724,8 +724,19 @@ function displayMessage(text, sender) {
                     code.classList.add(`language-${lang}`);
                     code.textContent = codeContent; // Set raw text content
 
+                    // ✅ Add Copy Button
+                    const copyBtn = document.createElement("button");
+                    copyBtn.classList.add("copy-btn");
+                    copyBtn.textContent = "Copy";
+                    copyBtn.onclick = () => copyToClipboard(code, copyBtn);
+
+                    const codeWrapper = document.createElement("div");
+                    codeWrapper.style.position = "relative";
+                    codeWrapper.appendChild(pre);
+                    codeWrapper.appendChild(copyBtn);
+
                     pre.appendChild(code);
-                    messageDiv.appendChild(pre);
+                    messageDiv.appendChild(codeWrapper);
 
                     // ✅ Ensure Prism.js applies properly
                     setTimeout(() => Prism.highlightElement(code), 50);
@@ -790,7 +801,6 @@ function displayMessage(text, sender) {
 
 
 
-
 document.getElementById("send-input").addEventListener("click", sendMessage);
 
 function collapse() {
@@ -799,5 +809,21 @@ function collapse() {
         sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
     }
 }
+
+
+
+    function copyToClipboard(codeElement, button) {
+    navigator.clipboard.writeText(codeElement.textContent).then(() => {
+        button.textContent = "Copied!";
+        setTimeout(() => button.textContent = "Copy", 1500);
+    }).catch(err => {
+        console.error("Error copying text: ", err);
+    });
+}
+
+
+
+
+    
     </script>
 </html>
