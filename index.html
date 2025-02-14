@@ -695,29 +695,32 @@ let chatHistory = [];
 async function sendMessage() {
     const userInputElement = document.getElementById("user-input");
     const userInput = userInputElement.value.trim();
-    
+
     if (!userInput) return;
 
     displayMessage(userInput, "user");
-
-    
     chatHistory.push({ role: "user", content: userInput });
 
     try {
+        console.log("Chat History Sent:", chatHistory); // ✅ Debug chat history
         const response = await fetch(workerURL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ messages: chatHistory }) 
+            body: JSON.stringify({ messages: chatHistory })
         });
 
         if (!response.ok) throw new Error("Failed to fetch");
 
         const data = await response.json();
-        const aiResponse = data.choices[0].message.content;
+        console.log("API Response:", data); // ✅ Debug API response
 
+        if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+            throw new Error("Invalid response from API");
+        }
+
+        const aiResponse = data.choices[0].message.content;
         displayMessage(aiResponse, "bot");
 
-        // ✅ Add AI response to chat history
         chatHistory.push({ role: "assistant", content: aiResponse });
 
     } catch (error) {
@@ -725,9 +728,9 @@ async function sendMessage() {
         console.error("Fetch Error:", error);
     }
 
-    
     userInputElement.value = "";
 }
+
 
 
 function displayMessage(text, sender) {
